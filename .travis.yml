@@ -11,3 +11,25 @@ script:
   # yarn test -- --coverage will show a coverage table then exit, we just need it to exit..
   # default CMD from docker.dev is yarn start, we override with yarn test -- --coverage
   - docker run weeznog/docker-react yarn test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2" # from AWS URL: DockerReact-env.wnqfm4pbac.us-east-2.elasticbeanstalk.com
+  name: "docker-react" # from aws name -> All Applications > docker-react
+  env: "DockerReact-env" # from aws --> all application > docker-react > DockerReact-env
+  # look in sevices > s3 > bucket name that matches your region so > elaticbeanstalk-us-east-2-....
+  bucket_name: "elasticbeanstalk-us-east-2-564159252323" #copry to s3 bucket - storage on aws
+
+  bucket_path: "docker-react" # deploy name above
+  on:
+    branch: master # only deploy to prod when master branch is updated
+
+  # api_keys ==> aws services > IAM > users > add user >
+  # 1. 'docker-react-travis-ci' (name not important)
+  # 2.  programmatic access ok
+  # 3. attach existing polcies > provide full access to AWS elasaic beanstalk
+  # 4. create aws user
+  # 5. goto travis settings > add env variable for both ACCESS / SECRET
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
