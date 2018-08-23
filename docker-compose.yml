@@ -1,0 +1,25 @@
+version: "3"
+services:
+  react-app:
+    build:
+      context: . # where we want the files and folder to be pulled from
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules # no : --> so do not look at ./node_modules and copy into /app/node_modules - use existing
+      - .:/app # map folder current pwd to folder inside container /app
+      # : --> indicate look at . and copy into /app
+
+  # RUN TESTING...
+  # 1. 2nd container for tets not the best because testing is always running and you cannot issues commands to it
+  # tests:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   volumes:
+  #     - /app/node_modules
+  #     - .:/app
+  #   command: ["yarn", "test"] # override starting CMD
+  # 2. remove tests service above and just run the below command in a seperate terminal tab
+  # docker exec -it <container-id> yarn test

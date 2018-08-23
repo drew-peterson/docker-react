@@ -1,0 +1,18 @@
+FROM node:alpine
+WORKDIR '/app'
+COPY package.json .
+RUN yarn install
+COPY . .
+CMD ["yarn", "start"]
+
+# build image without compose
+# docker build -f Dockerfile.dev .
+
+# you can remove your local node_modules folder -- its not needed from docker comtainer
+
+# VOLUMES - listen for changes and update container
+# docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app a60dcb0e51c
+
+# /app is the workdir from above...
+# $(pwd):/app ==> map the pwd into the /app folder -- copy...
+# /app/node_modules -- dont map working directory just use existing in app
