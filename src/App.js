@@ -10,7 +10,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">hot sauce is the best, will this work</p>
+        <p className="App-intro">hot sauce is the best</p>
+        <p className="App-intro">dev update pull request</p>
       </div>
     );
   }
