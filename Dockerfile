@@ -4,8 +4,9 @@
 # 1.  Production react build
 FROM node:alpine as builder
 WORKDIR '/app'
-COPY package.json .
-COPY yarn.lock .
+# AWS has trouble with . syntax??
+COPY package*.json ./
+COPY yarn*.lock ./
 RUN yarn install
 COPY . .
 RUN yarn build
