@@ -1,0 +1,13 @@
+sudo: required # required for docker
+services:
+  - docker #tell travis we need docker ready
+
+before_install:
+  - docker build -t weeznog/docker-react -f Dockerfile.dev .
+
+# commands to run
+script:
+  # each command needs to exit, yarn test doesnt by default
+  # yarn test -- --coverage will show a coverage table then exit, we just need it to exit..
+  # default CMD from docker.dev is yarn start, we override with yarn test -- --coverage
+  - docker run weeznog/docker-react yarn test -- --coverage
