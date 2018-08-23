@@ -14,7 +14,7 @@ RUN yarn build
 # 2. RUN
 FROM nginx
 # export 80required for AWS elasticbeanstalk -- looks for expose instructoion 
-# EXPOSE 80 
+EXPOSE 80 
 # copy files from as builder above
 # look in app/build -- where yarn build place content
 # nginx default to rendering static content is @ file loction /usr/share/nginx/html
