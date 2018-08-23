@@ -1,7 +1,8 @@
 FROM node:alpine
 WORKDIR '/app'
 COPY package.json .
-COPY yarn.lock . # travis requires this or else it will fail...
+# travis requires this or else it will fail...
+COPY yarn.lock . 
 RUN yarn install
 COPY . .
 CMD ["yarn", "start"]
