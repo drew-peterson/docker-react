@@ -13,7 +13,8 @@ RUN yarn build
 
 # 2. RUN
 FROM nginx
-# export 80required for AWS elasticbeanstalk -- looks for expose instructoion 
+# export 80 required for AWS elasticbeanstalk -- looks for expose instructoion 
+# have to setup port mapping just liek we do normally with -p...
 EXPOSE 80 
 # copy files from as builder above
 # look in app/build -- where yarn build place content
